@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Environment — NEVER commit real credentials
+.env
+
+# Logs
+logs/
+*.log
+
+# Airflow internals
+airflow/logs/
+airflow/airflow.cfg
+airflow/airflow.db
+airflow/webserver_config.py
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation & Automation Scripts (Avoid pushing setup scripts or Word docs)
+*.docx
+*.sh
