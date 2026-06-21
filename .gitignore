@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 venv/
 .venv/
+venv/
+venv_pipeline/
+venv_airflow/
 
 # Environment — NEVER commit real credentials
 .env

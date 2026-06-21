@@ -14,7 +14,7 @@ VALID_RANGES = {
     'relative_humidity_2m': (  0, 100),
     'precipitation':        (  0, 500),
     'wind_speed_10m':       (  0, 250),
-    'surface_pressure':     (850, 1085),
+    'surface_pressure':     (800, 1085),  
     'cloud_cover':          (  0, 100),
 }
  

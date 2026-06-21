@@ -75,9 +75,9 @@ class WeatherLoader:
         except SQLAlchemyError as e:
             logger.error(f'Error loading fact_weather: {e}')
             raise
- 
+
     def load(self, df: pd.DataFrame) -> None:
-        """Orchestrate all load steps in dependency order."""
+        """Orchestrates all load steps in order."""
         self.create_tables()
         self.load_dim_location(df)
         self.load_dim_date(df)

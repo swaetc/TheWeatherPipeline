@@ -1,13 +1,15 @@
 # airflow/dags/weather_dag.py
 from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.operators.python_operator import PythonOperator
 import sys, os
  
 # Add the project directories to Python path so Airflow scheduler/worker can find pipeline modules
 sys.path.insert(0, '/mnt/c/Users/Yabon/Desktop/TheWeatherPipeline')
 sys.path.insert(0, os.path.expanduser('~/weather_pipeline'))
- 
+sys.path.insert(0, '/mnt/c/Users/Yabon/Desktop/TheWeatherPipeline/venv_pipeline/lib/python3.12/site-packages')
+
+
 from pipeline.extractor   import WeatherExtractor
 from pipeline.transformer import WeatherTransformer
 from pipeline.loader      import WeatherLoader
