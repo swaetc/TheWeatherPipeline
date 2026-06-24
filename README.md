@@ -257,7 +257,7 @@ export AIRFLOW_HOME=$(pwd)/airflow
 airflow webserver --port 8090 &
 airflow scheduler &
 ```
-Then open [http://localhost:8080](http://localhost:8090) (default login: `admin` / `admin`).
+Then open [http://localhost:8090](http://localhost:8090) (default login: `admin` / `admin`).
 
 ---
 
@@ -288,26 +288,7 @@ python -m pytest tests/ --cov=pipeline --cov-report=term-missing
 | `transformer.py` | `test_transformer.py` | 22 |
 | `loader.py` | `test_loader.py` | 14 |
 
----
 
-## 🔄 Commit History
-
-| Commit | Description |
-|--------|-------------|
-| 1 | Project scaffold — directory structure & `.gitignore` |
-| 2 | Environment configuration — `config/settings.py`, `.env.example` |
-| 3 | PostgreSQL schema — `sql/schema.sql` |
-| 4 | Extractor module — `pipeline/extractor.py` |
-| 5 | Transformer module — `pipeline/transformer.py` |
-| 6 | Loader module — `pipeline/loader.py` |
-| 7 | Pipeline runner & ELT pipeline |
-| 8 | Airflow DAG |
-| 9 | Logging & validators utilities |
-| **10** | **Pytest unit tests (Part E)** |
-| **11** | **README & requirements** |
-| **12** | **Final integration & screenshots** |
-
----
 
 ## 📦 Dependencies
 
@@ -329,8 +310,9 @@ See `requirements_pipeline.txt` and `requirements_airflow.txt` for pinned versio
 ---
 
 ## Screenshots included on project folder
+- `see Screenshot folder on main project folder`
 
 ## 📝 License
 
-This project is submitted as part of a Data Engineering portfolio assessment.  
-© 2024 — All rights reserved.
+This project is submitted as part of a Data Engineering portfolio assessment from AI Community Africa (AICA).  
+© 2026 — All rights reserved.
