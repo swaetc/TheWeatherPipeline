@@ -82,35 +82,89 @@ git clone https://github.com/<your-username>/TheWeatherPipeline.git
 cd TheWeatherPipeline
 ```
 
-### 2 — Set up the environment
-```bash
-bash 00_setup_env.sh
-```
-This script:
-- Creates `venv_pipeline` and `venv_airflow` virtual environments
-- Installs all dependencies
-- Creates the PostgreSQL database `weather_analytics` and role `weather_user`
-- Initialises the Airflow metadata database
+### 2 — Create the pipeline virtual environment
 
-### 3 — Configure credentials
+```bash
+python3 -m venv venv_pipeline
+source venv_pipeline/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+deactivate
+```
+
+### 3 — Create the Airflow virtual environment
+
+```bash
+python3 -m venv venv_airflow
+source venv_airflow/bin/activate
+pip install --upgrade pip
+pip install "apache-airflow==2.8.4" \
+    --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.8.4/constraints-3.10.txt"
+deactivate
+```
+
+### 4 — Set up PostgreSQL
+
+Start the PostgreSQL service and create the database and role:
+
+```bash
+sudo service postgresql start
+
+# Open the postgres superuser shell
+sudo -u postgres psql <<'SQL'
+CREATE ROLE weather_user WITH LOGIN PASSWORD 'weather_pass123';
+CREATE DATABASE weather_analytics OWNER weather_user;
+GRANT ALL PRIVILEGES ON DATABASE weather_analytics TO weather_user;
+\q
+SQL
+```
+
+Apply the star-schema DDL:
+
+```bash
+source venv_pipeline/bin/activate
+PGPASSWORD=weather_pass123 psql \
+    -h localhost -U weather_user -d weather_analytics \
+    -f sql/schema.sql
+deactivate
+```
+
+### 5 — Initialise Airflow
+
+```bash
+source venv_airflow/bin/activate
+export AIRFLOW_HOME=$(pwd)/airflow
+airflow db init
+# Create the admin web-UI user
+airflow users create \
+    --username admin \
+    --password admin \
+    --firstname Admin \
+    --lastname User \
+    --role Admin \
+    --email admin@example.com
+deactivate
+```
+
+### 6 — Configure credentials
 ```bash
 cp .env.example .env
 nano .env          # fill in DB_PASSWORD (and any overrides)
 ```
 
-### 4 — Run the ETL pipeline manually
+### 7 — Run the ETL pipeline manually
 ```bash
 source venv_pipeline/bin/activate
 python -m pipeline.pipeline_runner
 ```
 
-### 5 — Run the ELT pipeline manually
+### 8 — Run the ELT pipeline manually
 ```bash
 source venv_pipeline/bin/activate
 python -c "from pipeline.elt_pipeline import ELTPipeline; ELTPipeline().run()"
 ```
 
-### 6 — Run the full test suite
+### 9 — Run the full test suite
 ```bash
 source venv_pipeline/bin/activate
 python -m pytest tests/ -v
