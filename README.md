@@ -254,10 +254,10 @@ extract_weather  ──►  transform_weather  ──►  load_weather  ──�
 ```bash
 source venv_airflow/bin/activate
 export AIRFLOW_HOME=$(pwd)/airflow
-airflow webserver --port 8080 &
+airflow webserver --port 8090 &
 airflow scheduler &
 ```
-Then open [http://localhost:8080](http://localhost:8080) (default login: `admin` / `admin`).
+Then open [http://localhost:8080](http://localhost:8090) (default login: `admin` / `admin`).
 
 ---
 
@@ -327,6 +327,8 @@ python -m pytest tests/ --cov=pipeline --cov-report=term-missing
 See `requirements_pipeline.txt` and `requirements_airflow.txt` for pinned versions.
 
 ---
+
+## Screenshots included on project folder
 
 ## 📝 License
 
